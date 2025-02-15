@@ -1,0 +1,5 @@
+outs:
+- md5: b5a6fb5f09388f9678edafd3f89edfa1
+  size: 37371003
+  hash: md5
+  path: clasificacion_siniestros.csv
