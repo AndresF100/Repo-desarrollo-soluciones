@@ -1,0 +1,3 @@
+fecha_siniestro_igdacmlmasolicitudes separar mes día
+
+ind_realizando_trabajo_hab_at_igatepmafurat arreglar datos
