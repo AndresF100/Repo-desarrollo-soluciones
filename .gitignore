@@ -1,1 +1,7 @@
-src/data_preprocessing/__pycache__/data_loader.cpython-311.pyc
+# Ignorar entornos virtuales
+venv/
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo

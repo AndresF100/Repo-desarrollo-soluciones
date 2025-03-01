@@ -1,6 +1,9 @@
 import logging
 import pandas as pd
 import numpy as np
+# ignore warnings
+import warnings
+warnings.filterwarnings("ignore")
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -53,7 +56,6 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     if cols_to_drop:
         df.drop(columns=cols_to_drop, inplace=True)
-        logging.info(f'\tColumnas eliminadas por irrelevancia: {cols_to_drop}')
 
     # 4. Eliminar columnas con más del 50% de valores nulos
     threshold = 0.5
