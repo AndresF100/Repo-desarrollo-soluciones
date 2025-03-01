@@ -35,7 +35,7 @@ COLUMNS_TO_DROP = [
 
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     original_shape = df.shape
-    logging.info(f'Iniciando limpieza: {original_shape} registros.')
+    logging.info(f'\tIniciando limpieza: {original_shape} registros.')
 
     # Eliminar primer columna (id de la fila)
     df.drop(df.columns[0], axis=1, inplace=True)
@@ -53,14 +53,14 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     if cols_to_drop:
         df.drop(columns=cols_to_drop, inplace=True)
-        logging.info(f'Columnas eliminadas por irrelevancia: {cols_to_drop}')
+        logging.info(f'\tColumnas eliminadas por irrelevancia: {cols_to_drop}')
 
     # 4. Eliminar columnas con más del 50% de valores nulos
     threshold = 0.5
     null_cols = df.columns[df.isnull().mean() > threshold]
     if len(null_cols) > 0:
         df.drop(columns=null_cols, inplace=True)
-        logging.info(f'Columnas eliminadas por alto porcentaje de nulos (>50%): {list(null_cols)}')
+        logging.info(f'\tColumnas eliminadas por alto porcentaje de nulos (>50%): {list(null_cols)}')
 
     # 5. Imputar valores nulos numéricos con la mediana
     for col in df.select_dtypes(include=np.number).columns:
@@ -73,7 +73,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         try:
             df[col] = pd.to_datetime(df[col], format=date_format, errors='coerce')
         except Exception as e:
-            logging.warning(f'Error al convertir columna {col} a datetime: {e}')
+            logging.warning(f'\tError al convertir columna {col} a datetime: {e}')
 
     # 7. Eliminar outliers (método IQR) en columnas numéricas (excluye las que empiezan por "origen")
     base_rows = df.shape[0]
@@ -92,14 +92,15 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
             df = df[(df[col] >= lower_bound) & (df[col] <= upper_bound)]
 
     actual_rows = df.shape[0]
-    logging.info(f'Total registros eliminados por outliers: {base_rows - actual_rows}.')
+    logging.info(f'\tTotal registros eliminados por outliers: {base_rows - actual_rows}.')
 
     # 8. Estandarizar texto
     for col in df.select_dtypes(include='object').columns:
         df[col] = df[col].str.strip().str.lower()
 
     # 9. Registrar cambios finales
+    df.dropna(inplace=True)
     final_shape = df.shape
-    logging.info(f'Limpieza completada: {final_shape} registros (cambio de {original_shape} a {final_shape}).')
+    logging.info(f'\tLimpieza completada: {final_shape} registros (cambio de {original_shape} a {final_shape}).')
 
     return df

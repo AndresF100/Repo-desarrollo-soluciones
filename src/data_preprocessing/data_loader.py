@@ -15,7 +15,7 @@ def load_data(filename: str, folder="raw"):
     if not file_path.exists():
         raise FileNotFoundError(f"El archivo {file_path} no existe.")
 
-    logging.info(f"Cargando datos desde: {file_path}")
+    logging.info(f"\tCargando datos desde: {file_path}")
     return pd.read_csv(file_path, sep=";", encoding='utf-8',low_memory=False)
 
 
