@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/fb47339995a64a6a89e0b392716658ff/artifacts
+end_time: 1740865283933
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: fb47339995a64a6a89e0b392716658ff
+run_name: shivering-shrike-358
+run_uuid: fb47339995a64a6a89e0b392716658ff
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740865250005
+status: 3
+tags: []
+user_id: AFO

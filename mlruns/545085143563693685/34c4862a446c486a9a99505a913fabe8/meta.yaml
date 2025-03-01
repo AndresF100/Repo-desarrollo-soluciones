@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/34c4862a446c486a9a99505a913fabe8/artifacts
+end_time: 1740865455221
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: 34c4862a446c486a9a99505a913fabe8
+run_name: luxuriant-shrike-544
+run_uuid: 34c4862a446c486a9a99505a913fabe8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740865425449
+status: 3
+tags: []
+user_id: AFO

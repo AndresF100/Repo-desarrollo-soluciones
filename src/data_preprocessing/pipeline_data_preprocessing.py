@@ -9,7 +9,7 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-OUTPUT_DIR = Path().resolve().parent.parent.joinpath("data", "processed")
+OUTPUT_DIR = Path(__file__).resolve().parent.parent.parent.joinpath("data", "processed")
 
 def save_data(X_train, X_val, X_test, y_train, y_val, y_test, output_dir=OUTPUT_DIR):
     # Guarda las variables objetivo (y) como CSV

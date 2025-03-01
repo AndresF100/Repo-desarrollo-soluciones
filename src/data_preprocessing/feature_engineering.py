@@ -81,17 +81,23 @@ def transform_data(df):
     return pipeline.fit_transform(df)
 
 def transform_and_split_data(df):
-
     target_column = 'origen_igdactmlmacalificacionorigen'
 
+    # Divide los datos
     train_df, val_df, test_df = split_data(df, target_column)
 
+    # Separa las features (X) y la variable objetivo (y)
     X_train, y_train = train_df.drop(columns=[target_column]), train_df[target_column]
     X_val, y_val = val_df.drop(columns=[target_column]), val_df[target_column]
     X_test, y_test = test_df.drop(columns=[target_column]), test_df[target_column]
 
-    transformed_train = transform_data(X_train)
-    transformed_val = transform_data(X_val)
-    transformed_test = transform_data(X_test)
+    # Crea el pipeline de transformación
+    pipeline = create_feature_engineering_pipeline()
 
-    return transformed_train, y_train, transformed_val, y_val, transformed_test, y_test
+    # Ajusta el pipeline solo con X_train y aplica a los otros conjuntos
+    X_train_transformed = pipeline.fit_transform(X_train)
+    X_val_transformed = pipeline.transform(X_val)
+    X_test_transformed = pipeline.transform(X_test)
+
+    return X_train_transformed, y_train, X_val_transformed, y_val, X_test_transformed, y_test
+
