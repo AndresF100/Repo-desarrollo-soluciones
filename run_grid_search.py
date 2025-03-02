@@ -29,7 +29,9 @@ X_val, y_val = load_data('data/processed/X_val.npz', 'data/processed/y_val.csv',
 logging.info(f"✅ Datos cargados correctamente")
 
 # 2. Configura la URI de MLflow (local o remoto)
-mlflow.set_tracking_uri("http://localhost:5000")
+# mlflow.set_tracking_uri("http://localhost:5000")
+mlflow.set_tracking_uri("http://52.200.136.24:8050")
+
 experiment_name = "clasificacion_siniestros_smote_new_metrics"
 mlflow.set_experiment(experiment_name)
 
