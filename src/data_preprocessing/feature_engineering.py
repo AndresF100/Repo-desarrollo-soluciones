@@ -27,18 +27,30 @@ class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
         for col in self.high_cardinality_cols:
             X[col + '_freq'] = X[col].map(self.mappings[col]).fillna(0)
         return X.drop(columns=self.high_cardinality_cols)
+    
+def detect_column_types(df, target_col, high_cardinality_threshold=20):
+    text_col = "descripcion_at_igatepmafurat"  # Variable a transformar con embeddings
 
-def detect_column_types(df, high_cardinality_threshold=0.05):
+    # Identificar columnas categóricas y numéricas
     categorical_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
     numerical_cols = df.select_dtypes(include=['number']).columns.tolist()
-    high_cardinality_cols = [col for col in categorical_cols if df[col].nunique() / len(df) > high_cardinality_threshold]
+
+    # Excluir la columna de texto y la variable objetivo
+    exclude_cols = {text_col, target_col}
+    categorical_cols = [col for col in categorical_cols if col not in exclude_cols]
+
+    # Identificar columnas de alta cardinalidad
+    high_cardinality_cols = [col for col in categorical_cols if df[col].nunique() > high_cardinality_threshold]
+
+    # Excluir las de alta cardinalidad de las categóricas
     categorical_cols = [col for col in categorical_cols if col not in high_cardinality_cols]
-    
-    return numerical_cols, categorical_cols, high_cardinality_cols
+
+    return numerical_cols, categorical_cols, high_cardinality_cols, text_col
+
 
 def create_feature_engineering_pipeline(df):
-    numerical_cols, categorical_cols, high_cardinality_cols = detect_column_types(df)
-    
+    numerical_cols, categorical_cols, high_cardinality_cols, text_col = detect_column_types(df,target_col='origen_igdactmlmacalificacionorigen')
+
     numeric_transformer = Pipeline(steps=[
         ('scaler', StandardScaler())
     ])
