@@ -6,8 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
-from sentence_transformers import SentenceTransformer
-import torch
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
     def __init__(self, high_cardinality_cols):
@@ -24,35 +23,6 @@ class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
         for col in self.high_cardinality_cols:
             X[col + '_freq'] = X[col].map(lambda x: self.mappings[col].get(x, 0))
         return X.drop(columns=self.high_cardinality_cols)
-
-class TextEmbeddingTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, model_name='all-MiniLM-L6-v2'):
-        self.model_name = model_name
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.model = SentenceTransformer(model_name, device=self.device)
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        # Asegurar que X es una Serie (columna única)
-        if isinstance(X, pd.DataFrame):
-            X = X.iloc[:, 0]
-
-        X = X.fillna('missing').astype(str)
-
-        try:
-            embeddings = self.model.encode(
-                X.tolist(),
-                convert_to_numpy=True,
-                device=self.device,
-                batch_size=32  # Ajustar el tamaño de batch si es necesario
-            )
-        except Exception as e:
-            print(f"Error al procesar embeddings: {e}")
-            embeddings = np.zeros((len(X), self.model.get_sentence_embedding_dimension()))
-
-        return embeddings
 
 def detect_column_types(df, target_col, high_cardinality_threshold=20):
     text_col = "descripcion_at_igatepmafurat"
@@ -86,7 +56,7 @@ def create_feature_engineering_pipeline(df):
     ])
 
     text_transformer = Pipeline(steps=[
-        ('embedder', TextEmbeddingTransformer())
+        ('tfidf', TfidfVectorizer(max_features=200))
     ])
 
     feature_engineering = ColumnTransformer(
@@ -94,7 +64,7 @@ def create_feature_engineering_pipeline(df):
             ('num', numeric_transformer, numerical_cols),
             ('cat', categorical_transformer, categorical_cols),
             ('high_card', high_cardinality_transformer, high_cardinality_cols),
-            ('text', text_transformer, [text_col]),
+            ('text', text_transformer, text_col),
         ],
         remainder='drop'
     )
@@ -110,6 +80,10 @@ def split_data(df, target_column, test_size=0.2, val_size=0.1, random_state=42):
     train_df, val_df = train_test_split(train_df, test_size=val_size / (1 - test_size), random_state=random_state)
     return train_df, val_df, test_df
 
+def check_dimensions(X_train, X_val, X_test):
+    min_features = min(X_train.shape[1], X_val.shape[1], X_test.shape[1])
+    return X_train[:, :min_features], X_val[:, :min_features], X_test[:, :min_features]
+
 def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionorigen'):
     train_df, val_df, test_df = split_data(df, target_column)
 
@@ -122,5 +96,7 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
     X_train_transformed = pipeline.fit_transform(X_train)
     X_val_transformed = pipeline.transform(X_val)
     X_test_transformed = pipeline.transform(X_test)
+
+    X_train_transformed, X_val_transformed, X_test_transformed = check_dimensions(X_train_transformed, X_val_transformed, X_test_transformed)
 
     return X_train_transformed, y_train, X_val_transformed, y_val, X_test_transformed, y_test
