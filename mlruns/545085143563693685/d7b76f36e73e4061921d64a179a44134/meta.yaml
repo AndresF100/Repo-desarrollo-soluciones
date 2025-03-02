@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/d7b76f36e73e4061921d64a179a44134/artifacts
+end_time: 1740864990171
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: d7b76f36e73e4061921d64a179a44134
+run_name: omniscient-midge-185
+run_uuid: d7b76f36e73e4061921d64a179a44134
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740864959856
+status: 3
+tags: []
+user_id: AFO

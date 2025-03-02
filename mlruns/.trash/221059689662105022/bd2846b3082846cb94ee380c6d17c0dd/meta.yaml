@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/221059689662105022/bd2846b3082846cb94ee380c6d17c0dd/artifacts
+deleted_time: 1740864833823
+end_time: 1740863940277
+entry_point_name: ''
+experiment_id: '221059689662105022'
+lifecycle_stage: deleted
+run_id: bd2846b3082846cb94ee380c6d17c0dd
+run_name: bedecked-fawn-230
+run_uuid: bd2846b3082846cb94ee380c6d17c0dd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740863903363
+status: 4
+tags: []
+user_id: AFO

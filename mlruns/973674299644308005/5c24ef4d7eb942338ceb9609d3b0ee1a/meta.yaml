@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/973674299644308005/5c24ef4d7eb942338ceb9609d3b0ee1a/artifacts
+end_time: 1740941252051
+entry_point_name: ''
+experiment_id: '973674299644308005'
+lifecycle_stage: active
+run_id: 5c24ef4d7eb942338ceb9609d3b0ee1a
+run_name: gifted-bat-176
+run_uuid: 5c24ef4d7eb942338ceb9609d3b0ee1a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740941223014
+status: 3
+tags: []
+user_id: AFO

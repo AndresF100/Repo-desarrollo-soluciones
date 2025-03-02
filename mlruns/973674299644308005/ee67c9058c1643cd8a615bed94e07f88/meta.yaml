@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/973674299644308005/ee67c9058c1643cd8a615bed94e07f88/artifacts
+end_time: 1740941090276
+entry_point_name: ''
+experiment_id: '973674299644308005'
+lifecycle_stage: active
+run_id: ee67c9058c1643cd8a615bed94e07f88
+run_name: ambitious-wolf-214
+run_uuid: ee67c9058c1643cd8a615bed94e07f88
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740941075165
+status: 3
+tags: []
+user_id: AFO

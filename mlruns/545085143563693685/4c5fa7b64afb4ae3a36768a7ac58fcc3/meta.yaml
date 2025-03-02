@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/4c5fa7b64afb4ae3a36768a7ac58fcc3/artifacts
+end_time: 1740940826455
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: 4c5fa7b64afb4ae3a36768a7ac58fcc3
+run_name: merciful-foal-748
+run_uuid: 4c5fa7b64afb4ae3a36768a7ac58fcc3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740940821095
+status: 4
+tags: []
+user_id: AFO
