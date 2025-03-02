@@ -5,6 +5,7 @@ import scipy.sparse
 from src.models.model_search import GridSearch
 import logging
 
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 logging.info("Iniciando pipeline de experimentación...")
@@ -29,7 +30,7 @@ logging.info(f"✅ Datos cargados correctamente")
 
 # 2. Configura la URI de MLflow (local o remoto)
 mlflow.set_tracking_uri("http://localhost:5000")
-experiment_name = "clasificacion_siniestros_smote"
+experiment_name = "clasificacion_siniestros_smote_new_metrics"
 mlflow.set_experiment(experiment_name)
 
 logging.info(f"✅ MLflow configurado correctamente, experimento: {experiment_name}")

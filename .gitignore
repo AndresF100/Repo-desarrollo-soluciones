@@ -7,3 +7,5 @@ __pycache__/
 *.pyo
 mlartifacts/
 /data
+config/llave.pem
+config/access_commands.txt
