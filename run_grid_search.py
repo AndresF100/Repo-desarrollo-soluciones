@@ -29,7 +29,7 @@ logging.info(f"✅ Datos cargados correctamente")
 
 # 2. Configura la URI de MLflow (local o remoto)
 mlflow.set_tracking_uri("http://localhost:5000")
-experiment_name = "clasificacion_siniestros_test"
+experiment_name = "clasificacion_siniestros_smote"
 mlflow.set_experiment(experiment_name)
 
 logging.info(f"✅ MLflow configurado correctamente, experimento: {experiment_name}")
