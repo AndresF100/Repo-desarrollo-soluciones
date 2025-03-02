@@ -134,7 +134,12 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     for col in df.select_dtypes(include='object').columns:
         df[col] = df[col].str.strip().str.lower()
 
-    # 9. Registrar cambios finales
+    # 9. Limpiar columna de texto descripción
+    text_col = 'descripcion_at_igatepmafurat'
+    df[text_col] = df[text_col].str.replace(r'\W', ' ', regex=True).str.replace(r'\s+', ' ', regex=True)
+     
+
+    # 10. Registrar cambios finales
     df.dropna(inplace=True)
     final_shape = df.shape
     logging.info(f'\tLimpieza completada: {final_shape} registros (cambio de {original_shape} a {final_shape}).')
