@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/84c9e81a699c44c2b94a21541bcd8721/artifacts
+end_time: 1740939398474
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: 84c9e81a699c44c2b94a21541bcd8721
+run_name: useful-bass-924
+run_uuid: 84c9e81a699c44c2b94a21541bcd8721
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740939388724
+status: 3
+tags: []
+user_id: AFO

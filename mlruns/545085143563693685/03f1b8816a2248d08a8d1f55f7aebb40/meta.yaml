@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/03f1b8816a2248d08a8d1f55f7aebb40/artifacts
+end_time: 1740940442886
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: 03f1b8816a2248d08a8d1f55f7aebb40
+run_name: colorful-fowl-474
+run_uuid: 03f1b8816a2248d08a8d1f55f7aebb40
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740940438612
+status: 4
+tags: []
+user_id: AFO

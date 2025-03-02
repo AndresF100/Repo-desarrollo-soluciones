@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/973674299644308005
+creation_time: 1740941014443
+experiment_id: '973674299644308005'
+last_update_time: 1740941014443
+lifecycle_stage: active
+name: clasificacion_siniestros_smote

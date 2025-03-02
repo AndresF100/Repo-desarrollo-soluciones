@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/973674299644308005/b637be1cf79f42d39033e846a05d6513/artifacts
+end_time: 1740941075121
+entry_point_name: ''
+experiment_id: '973674299644308005'
+lifecycle_stage: active
+run_id: b637be1cf79f42d39033e846a05d6513
+run_name: honorable-boar-255
+run_uuid: b637be1cf79f42d39033e846a05d6513
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740941058651
+status: 3
+tags: []
+user_id: AFO
