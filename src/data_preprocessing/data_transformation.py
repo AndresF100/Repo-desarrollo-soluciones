@@ -28,7 +28,7 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
 
     # 3. Ajuste de columnas de categoría
     # Identificar columnas que empiezan con "ind" o "id"
-    cols_to_str = df.filter(regex='^(ind|id|emp|tipo|seg)').columns
+    cols_to_str = df.filter(regex='^(ind|id|emp|tipo|seg|centro)').columns
 
 
     # Convertir las columnas seleccionadas a tipo str
@@ -61,10 +61,27 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     df["hora_siniestro_sin"] = np.sin(2 * np.pi * df["hora_at_igatepmafurat"] / 24)
     df["hora_siniestro_cos"] = np.cos(2 * np.pi * df["hora_at_igatepmafurat"] / 24)
 
+    
+    # Ciclo fijo de 24 horas (0-23)
+    df["hora_previo_sin"] = np.sin(2 * np.pi * df["horas_previo_at_igatepmafurat"] / 24)
+    df["hora_previo_cos"] = np.cos(2 * np.pi * df["horas_previo_at_igatepmafurat"] / 24)
+
+
     # Remover columnas originales
-    df.drop(columns=["fecha_siniestro_month", "fecha_siniestro_day", "hora_at_igatepmafurat"], inplace=True)
+    df.drop(columns=["fecha_siniestro_month", "fecha_siniestro_day", "hora_at_igatepmafurat","horas_previo_at_igatepmafurat"], inplace=True)
     
     logging.info(f"\tSe han capturado las periodicidades en las variables temporales con seno y coseno.") 
+
+    # reemplazar valores fuera de s y n 
+    columnas_1 = ['dto_igdacmlmasolicitudes', 'pcl_igdacmlmasolicitudes']
+    columnas_2 = ['accidente_grave_igatepmafurat', 'riesgo_biologico_igatepmafurat']
+
+    # Aplicar reemplazos en las columnas correspondientes
+    df[columnas_1] = df[columnas_1].replace('', 'n')
+    df[columnas_2] = df[columnas_2].replace('0', 'n')
+
+    logging.info(f"\tSe han imputado los espacios vacíos o ceros en variables binarias.") 
+
     
     return df
 
