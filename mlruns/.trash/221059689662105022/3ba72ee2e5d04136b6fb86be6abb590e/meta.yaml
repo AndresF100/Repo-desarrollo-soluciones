@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/221059689662105022/3ba72ee2e5d04136b6fb86be6abb590e/artifacts
+deleted_time: 1740864833823
+end_time: 1740864761509
+entry_point_name: ''
+experiment_id: '221059689662105022'
+lifecycle_stage: deleted
+run_id: 3ba72ee2e5d04136b6fb86be6abb590e
+run_name: welcoming-shoat-113
+run_uuid: 3ba72ee2e5d04136b6fb86be6abb590e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740864745304
+status: 3
+tags: []
+user_id: AFO

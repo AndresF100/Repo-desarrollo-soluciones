@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/221059689662105022/c76c7b6d68794056b1c455c321edb1f8/artifacts
+deleted_time: 1740864833823
+end_time: 1740864586401
+entry_point_name: ''
+experiment_id: '221059689662105022'
+lifecycle_stage: deleted
+run_id: c76c7b6d68794056b1c455c321edb1f8
+run_name: useful-kite-397
+run_uuid: c76c7b6d68794056b1c455c321edb1f8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740864400105
+status: 3
+tags: []
+user_id: AFO

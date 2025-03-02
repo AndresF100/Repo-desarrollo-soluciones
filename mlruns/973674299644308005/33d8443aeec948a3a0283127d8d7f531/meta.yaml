@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/973674299644308005/33d8443aeec948a3a0283127d8d7f531/artifacts
+end_time: 1740941031332
+entry_point_name: ''
+experiment_id: '973674299644308005'
+lifecycle_stage: active
+run_id: 33d8443aeec948a3a0283127d8d7f531
+run_name: righteous-dove-47
+run_uuid: 33d8443aeec948a3a0283127d8d7f531
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740941014704
+status: 3
+tags: []
+user_id: AFO
