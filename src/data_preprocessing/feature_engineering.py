@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.over_sampling import SMOTE
 
 class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
     def __init__(self, high_cardinality_cols):
@@ -91,6 +92,13 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
     X_val, y_val = val_df.drop(columns=[target_column]), val_df[target_column]
     X_test, y_test = test_df.drop(columns=[target_column]), test_df[target_column]
 
+    # Codificar y si es categórico
+    if y_train.dtype == 'object' or y_train.dtype.name == 'category':
+        label_encoder = LabelEncoder()
+        y_train = label_encoder.fit_transform(y_train)
+        y_val = label_encoder.transform(y_val)
+        y_test = label_encoder.transform(y_test)
+
     pipeline = create_feature_engineering_pipeline(X_train)
 
     X_train_transformed = pipeline.fit_transform(X_train)
@@ -99,4 +107,12 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
 
     X_train_transformed, X_val_transformed, X_test_transformed = check_dimensions(X_train_transformed, X_val_transformed, X_test_transformed)
 
-    return X_train_transformed, y_train, X_val_transformed, y_val, X_test_transformed, y_test
+    # Aplicar SMOTE de forma segura
+    min_samples_per_class = np.bincount(y_train)
+    min_samples = min(min_samples_per_class)
+
+    if min_samples > 5:
+        smote = SMOTE(k_neighbors=min(5, min_samples - 1), random_state=42)
+        X_train_transformed, y_train = smote.fit_resample(X_train_transformed, y_train)
+
+    return X_train_transformed, pd.Series(y_train), X_val_transformed, pd.Series(y_val), X_test_transformed, pd.Series(y_test)

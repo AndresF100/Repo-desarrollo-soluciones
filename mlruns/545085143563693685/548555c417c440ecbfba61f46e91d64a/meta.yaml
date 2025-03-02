@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/548555c417c440ecbfba61f46e91d64a/artifacts
+end_time: 1740940304414
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: 548555c417c440ecbfba61f46e91d64a
+run_name: capricious-quail-476
+run_uuid: 548555c417c440ecbfba61f46e91d64a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740940286824
+status: 3
+tags: []
+user_id: AFO

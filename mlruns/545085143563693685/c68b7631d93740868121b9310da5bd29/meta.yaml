@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/545085143563693685/c68b7631d93740868121b9310da5bd29/artifacts
+end_time: 1740939388681
+entry_point_name: ''
+experiment_id: '545085143563693685'
+lifecycle_stage: active
+run_id: c68b7631d93740868121b9310da5bd29
+run_name: handsome-snake-327
+run_uuid: c68b7631d93740868121b9310da5bd29
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740939371096
+status: 3
+tags: []
+user_id: AFO
