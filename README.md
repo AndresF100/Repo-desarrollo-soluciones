@@ -19,55 +19,21 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 ## 📂 Estructura del Repositorio
 ```
 └── 📁Repo desarrollo soluciones
-    └── 📁.github
-        └── 📁workflows
     └── 📁config
     └── 📁data
-        └── 📁raw
-    └── 📁deployment
     └── 📁Docs
-    └── 📁experiments
     └── 📁notebooks
     └── 📁src
-        └── 📁data
-        └── 📁features
-        └── 📁models
-        └── 📁pipelines
-        └── 📁utils
-    └── 📁tests
-    └── README.md
 ```
 
 ### Descripción de Carpetas
 
-* data/ → Contiene los datos en diferentes estados del procesamiento. Se gestiona con DVC.
-
-* notebooks/ → Notebooks de Jupyter para experimentación y análisis inicial.
-
-* src/ → Código fuente organizado en módulos:
-
-    * data/ → Scripts para cargar y preprocesar los datos.
-
-    * features/ → Ingeniería de características.
-
-    * models/ → Entrenamiento, evaluación y predicciones del modelo.
-
-    * pipelines/ → Pipelines para procesar datos y entrenar modelos.
-
-    * utils/ → Funciones auxiliares.
-
-* Docs/ → Documentación del proyecto.
-
-* experiments/ → Almacena resultados de experimentos y pruebas.
-
-* deployment/ → Contiene la API de inferencia con FastAPI y archivos para el despliegue en producción.
-
-* config/ → Parámetros de configuración del proyecto.
-
-* tests/ → Pruebas unitarias y de integración para garantizar la calidad del código.
-
-* .github/ → Workflows para CI/CD con GitHub Actions.
-
+* **config/**: Contiene configuraciones, llaves de acceso para sesiones de VM y scripts auxiliares.
+* **.github/**: Almacena configuraciones para automatización con GitHub Actions (CI/CD).
+* **notebooks/**: Incluye notebooks de Jupyter para exploración, preprocesamiento y análisis.
+* **Docs/**: Documentación del proyecto con informes y análisis del problema.
+* **data/**: Almacena los datos en distintas etapas: crudos (raw), procesados (processed), y para visualización (visual).
+* **src/**: Código fuente del proyecto, dividido en submódulos para preprocesamiento (data_preprocessing/) y modelos (models/).
 
 
 ## 🚀 Requisitos
@@ -76,5 +42,5 @@ Si utilizas DVC, inicializa el proyecto con:
     
 ```bash
 dvc init
-dvc pull  # Para descargar los datos versionados
+dvc checkout
 ```
