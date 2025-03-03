@@ -9,3 +9,6 @@ mlartifacts/
 /data
 config/llave.pem
 config/access_commands.txt
+# Large files to ignore
+data.rar
+
