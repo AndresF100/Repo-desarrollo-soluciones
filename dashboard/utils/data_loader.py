@@ -11,7 +11,7 @@ def load_data():
     df['day'] = pd.to_datetime(df['fecha_siniestro_igdacmlmasolicitudes']).dt.day
     
     # Load predictions data
-    predictions_df = pd.read_csv('predictions.csv')
+    predictions_df = pd.read_csv('dashboard/predictions.csv')
     
     return df, predictions_df
 
