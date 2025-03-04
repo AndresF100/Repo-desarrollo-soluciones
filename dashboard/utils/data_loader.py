@@ -5,13 +5,13 @@ from analisis_texto import generate_wordcloud
 def load_data():
     """Load and prepare all data needed for the dashboard"""
     # Load the main dataset
-    df = pd.read_csv('/home/scallopfrito/Proyecto_MLOps/Repo-desarrollo-soluciones/dashboard/data_for_visuals.csv.xls')
+    df = pd.read_csv('dashboard/data_for_visuals.csv.xls')
     
     # Prepare day column
     df['day'] = pd.to_datetime(df['fecha_siniestro_igdacmlmasolicitudes']).dt.day
     
     # Load predictions data
-    predictions_df = pd.read_csv('data/visual/predictions.csv')
+    predictions_df = pd.read_csv('predictions.csv')
     
     return df, predictions_df
 
