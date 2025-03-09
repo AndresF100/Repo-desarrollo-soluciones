@@ -9,3 +9,4 @@ mlartifacts/
 /data
 config/llave.pem
 config/access_commands.txt
+config/mlflow.pem

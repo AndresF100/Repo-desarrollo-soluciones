@@ -5,3 +5,4 @@ mlflow
 xgboost
 sentence-transformers
 imblearn
+dvc
