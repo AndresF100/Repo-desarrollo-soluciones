@@ -42,5 +42,5 @@ Si utilizas DVC, inicializa el proyecto con:
     
 ```bash
 dvc init
-dvc checkout
+dvc pull
 ```
