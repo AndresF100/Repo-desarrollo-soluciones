@@ -1,4 +1,7 @@
 [core]
-    remote = local
-['remote "local"']
-    url = ../data
+    remote = s3remote
+['remote "s3remote"']
+    url = s3://dvc-storage-project-ds
+    use_ssl = true
+    profile = default
+    region = us-east-1
