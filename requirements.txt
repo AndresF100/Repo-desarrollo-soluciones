@@ -13,3 +13,4 @@ plotly==5.14.1
 matplotlib==3.7.1
 wordcloud
 pillow==10.0.0
+dvc
