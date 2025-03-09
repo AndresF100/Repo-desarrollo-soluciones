@@ -1,7 +1,5 @@
 [core]
-    remote = s3remote
-['remote "s3remote"']
-    url = s3://dvc-storage-project-ds
-    use_ssl = true
-    profile = default
-    region = us-east-1
+    remote = gcsremote
+['remote "gcsremote"']
+    url = gs://dvc-storage-bucket-ds
+    credentialpath = D:\OneDrive - Universidad de La Salle\MAESTR~1\S4\Desarrollo de soluciones\Proyecto\Repo desarrollo soluciones\config\dvc-key.json
