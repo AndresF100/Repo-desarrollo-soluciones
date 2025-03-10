@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import os
 
 # Carga las variables de entorno
-load_dotenv()
+load_dotenv(".env.mlflow_server")
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
