@@ -7,6 +7,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.under_sampling import RandomUnderSampler
 from imblearn.over_sampling import SMOTE
 
 class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
@@ -107,12 +108,19 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
 
     X_train_transformed, X_val_transformed, X_test_transformed = check_dimensions(X_train_transformed, X_val_transformed, X_test_transformed)
 
-    # Aplicar SMOTE de forma segura
-    min_samples_per_class = np.bincount(y_train)
-    min_samples = min(min_samples_per_class)
+    # Balanceo mixto (undersampling + oversampling)
+    class_counts = np.bincount(y_train)
+    min_class_count = np.min(class_counts)
+    max_class_count = np.max(class_counts)
 
-    if min_samples > 5:
-        smote = SMOTE(k_neighbors=min(5, min_samples - 1), random_state=42)
-        X_train_transformed, y_train = smote.fit_resample(X_train_transformed, y_train)
+    # 1. Reducir la clase mayoritaria (si está muy desbalanceada)
+    if max_class_count > 3 * min_class_count:
+        target_counts = {cls: min(count, min_class_count * 2) for cls, count in enumerate(class_counts)}
+        under_sampler = RandomUnderSampler(sampling_strategy=target_counts, random_state=42)
+        X_train_transformed, y_train = under_sampler.fit_resample(X_train_transformed, y_train)
+
+    # 2. Aumentar las clases minoritarias (SMOTE)
+    smote = SMOTE(k_neighbors=min(5, min_class_count - 1), random_state=42)
+    X_train_transformed, y_train = smote.fit_resample(X_train_transformed, y_train)
 
     return X_train_transformed, pd.Series(y_train), X_val_transformed, pd.Series(y_val), X_test_transformed, pd.Series(y_test)

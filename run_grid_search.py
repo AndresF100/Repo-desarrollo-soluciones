@@ -47,6 +47,6 @@ logging.info("🔎 Iniciando experimentación...")
 search = GridSearch("RandomForest", X_train, y_train, X_val, y_val)
 search.run()
 
-# 4. Ejecuta Grid Search para XGBoost
-search = GridSearch("XGBoost", X_train, y_train, X_val, y_val)
-search.run()
+# # 4. Ejecuta Grid Search para XGBoost
+# search = GridSearch("XGBoost", X_train, y_train, X_val, y_val)
+# search.run()
