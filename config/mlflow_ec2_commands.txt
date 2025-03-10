@@ -1,0 +1,12 @@
+# Activación manual dentro de ec2
+source mlflow-env/bin/activate
+mlflow server --host 0.0.0.0 --port 8050
+
+## Se creó un servicio, por ende, cada vez que se inicie la máquina, se activa el comando anterior, para ello se creó un archivo de configuración en /etc/systemd/system/mlflow.service
+
+#revisar servicio
+sudo systemctl status mlflow
+
+#detener servicio
+sudo systemctl stop mlflow
+

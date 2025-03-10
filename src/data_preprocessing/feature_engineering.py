@@ -7,6 +7,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.under_sampling import RandomUnderSampler
 from imblearn.over_sampling import SMOTE
 
 class HighCardinalityEncoder(BaseEstimator, TransformerMixin):
@@ -85,6 +86,54 @@ def check_dimensions(X_train, X_val, X_test):
     min_features = min(X_train.shape[1], X_val.shape[1], X_test.shape[1])
     return X_train[:, :min_features], X_val[:, :min_features], X_test[:, :min_features]
 
+
+def balance_classes(X_train, y_train):
+    """
+    Balancea las clases de un conjunto de datos.
+    Se aplica un undersampling a la clase mayoritaria y un oversampling a las clases minoritarias.
+    de la siguiente manera:
+    1. Se reduce la clase mayoritaria al tamaño de la segunda clase mayoritaria.
+    2. Se aumenta el tamaño de las clases minoritarias al 25% del tamaño de la segunda clase mayoritaria.
+
+    """
+    class_counts = np.bincount(y_train)
+    sorted_counts = np.sort(class_counts)[::-1]
+
+    if len(sorted_counts) < 4:
+        raise ValueError("Se esperaban al menos 4 clases para aplicar este balanceo.")
+
+    second_majority_count = sorted_counts[1]
+    minority_target_size = int(second_majority_count * 0.25)
+
+    # 1. Reducir la clase mayoritaria al tamaño de la segunda mayoritaria
+    target_counts = {
+        cls: second_majority_count if count == sorted_counts[0] else count
+        for cls, count in enumerate(class_counts)
+    }
+
+    under_sampler = RandomUnderSampler(sampling_strategy=target_counts, random_state=42)
+    X_train_resampled, y_train_resampled = under_sampler.fit_resample(X_train, y_train)
+
+    # 2. Recalcular las clases después del undersampling
+    new_class_counts = np.bincount(y_train_resampled)
+    second_majority_count = sorted(new_class_counts)[-2]
+
+    # 3. Ajustar SMOTE dinámicamente
+    smote_strategy = {}
+    for cls, count in enumerate(new_class_counts):
+        if count < minority_target_size and count >= 2:
+            # Asegurar que k_neighbors <= n_samples - 1
+            k_neighbors = min(5, count - 1)
+            smote_strategy[cls] = minority_target_size
+
+    if smote_strategy:
+        smote = SMOTE(sampling_strategy=smote_strategy, k_neighbors=k_neighbors, random_state=42)
+        X_train_resampled, y_train_resampled = smote.fit_resample(X_train_resampled, y_train_resampled)
+
+    return X_train_resampled, pd.Series(y_train_resampled)
+
+
+
 def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionorigen'):
     train_df, val_df, test_df = split_data(df, target_column)
 
@@ -107,12 +156,7 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
 
     X_train_transformed, X_val_transformed, X_test_transformed = check_dimensions(X_train_transformed, X_val_transformed, X_test_transformed)
 
-    # Aplicar SMOTE de forma segura
-    min_samples_per_class = np.bincount(y_train)
-    min_samples = min(min_samples_per_class)
-
-    if min_samples > 5:
-        smote = SMOTE(k_neighbors=min(5, min_samples - 1), random_state=42)
-        X_train_transformed, y_train = smote.fit_resample(X_train_transformed, y_train)
+    # Balanceo mixto (undersampling + oversampling)
+    X_train_transformed, y_train = balance_classes(X_train_transformed, y_train)
 
     return X_train_transformed, pd.Series(y_train), X_val_transformed, pd.Series(y_val), X_test_transformed, pd.Series(y_test)
