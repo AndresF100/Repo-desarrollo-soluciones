@@ -2,12 +2,16 @@ from itertools import product
 
 HYPERPARAM_GRID = {
     "RandomForest": {
-        "n_estimators": [100, 200, 500],         # Más árboles para capturar mejor las clases minoritarias
-        "max_depth": [10, 20, 30],               # Mayor profundidad para encontrar patrones complejos
-        "min_samples_split": [2, 5],             # Controla la división mínima
-        "min_samples_leaf": [1, 3],              # Garantiza que no se pierdan clases raras
-        "class_weight": ["balanced"]             # Ajusta automáticamente los pesos según la frecuencia
-    },
+        "n_estimators": [1,2,3,4, 6, 8],          # Más árboles para capturar clases raras
+        "max_depth": [8,9,10],                # Mayor profundidad para patrones complejos
+        "min_samples_split": [2, 4],         # Controla la división mínima
+        "min_samples_leaf": [1,],          # Garantiza no perder clases raras
+        "class_weight": ["balanced"],           # Ajusta automáticamente los pesos
+        "max_features": ["sqrt", None], # Controla el número de variables por split
+        "criterion": ["gini", "entropy"],       # Mide la calidad de la división
+        "max_samples": [0.7, 0.9]         # Submuestreo para más diversidad
+             
+             },
     "XGBoost": {
         "n_estimators": [100, 300],
         "learning_rate": [0.01, 0.1],
