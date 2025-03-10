@@ -11,3 +11,5 @@ config/llave.pem
 config/access_commands.txt
 config/mlflow.pem
 config/dvc-key.json
+classification_report.json
+confusion_matrix.json

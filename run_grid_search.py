@@ -44,9 +44,21 @@ logging.info(f"✅ MLflow configurado correctamente, experimento: {experiment_na
 
 logging.info("🔎 Iniciando experimentación...")
 # 3. Ejecuta Grid Search para RandomForest
-search = GridSearch("RandomForest", X_train, y_train, X_val, y_val)
-search.run()
+# search = GridSearch("RandomForest", X_train, y_train, X_val, y_val)
+# search.run()
 
-# # 4. Ejecuta Grid Search para XGBoost
+# 4. Ejecuta Grid Search para XGBoost
 # search = GridSearch("XGBoost", X_train, y_train, X_val, y_val)
 # search.run()
+
+# # 5. Ejecuta Grid Search para LightGBM
+# search = GridSearch("LightGBM", X_train, y_train, X_val, y_val)
+# search.run()
+
+# # 6. Ejecuta Grid Search para CatBoost
+# search = GridSearch("CatBoost", X_train, y_train, X_val, y_val)
+# search.run()
+
+# 7. Ejecuta Grid Search para MLP
+search = GridSearch("MLP", X_train, y_train, X_val, y_val)
+search.run()
