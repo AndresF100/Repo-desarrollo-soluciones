@@ -2,9 +2,12 @@ import os
 import pandas as pd
 import mlflow.pyfunc
 import pytest
+import sys
 
 # Ruta base del proyecto
 BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+sys.path.append(BASE_PATH)
 
 # Ruta al modelo empaquetado
 MODEL_PATH = os.path.join(BASE_PATH, "model_package")

@@ -1,2 +1,3 @@
 mlflow
 python-dotenv
+imblearn

@@ -1,8 +1,10 @@
 # Ignorar entornos virtuales
 venv/
 env-tox/
-.pkg/
 
+
+.pkg/
+.vscode/
 # Ignorar archivos de caché de Python
 __pycache__/
 *.pyc
@@ -15,5 +17,4 @@ config/mlflow.pem
 config/dvc-key.json
 classification_report.json
 confusion_matrix.json
-
-model/package_pipeline.py
+mlruns/
