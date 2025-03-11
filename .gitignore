@@ -1,5 +1,6 @@
 # Ignorar entornos virtuales
 venv/
+env-tox/
 
 # Ignorar archivos de caché de Python
 __pycache__/
@@ -13,3 +14,4 @@ config/mlflow.pem
 config/dvc-key.json
 classification_report.json
 confusion_matrix.json
+
