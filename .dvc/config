@@ -1,0 +1,5 @@
+[core]
+    remote = gcsremote
+['remote "gcsremote"']
+    url = gs://dvc-storage-bucket-ds
+    credentialpath = D:\OneDrive - Universidad de La Salle\MAESTR~1\S4\Desarrollo de soluciones\Proyecto\Repo desarrollo soluciones\config\dvc-key.json

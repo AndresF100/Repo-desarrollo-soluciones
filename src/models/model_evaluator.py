@@ -16,6 +16,7 @@ class ModelEvaluator:
         metrics = {
             "accuracy": accuracy_score(y, predictions),
             "f1_score": f1_score(y, predictions, average="weighted"),
+            "f1_score_macro": f1_score(y, predictions, average="macro"),
             "precision": precision_score(y, predictions, average="weighted"),
             "recall": recall_score(y, predictions, average="weighted"),
         }

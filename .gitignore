@@ -9,6 +9,7 @@ mlartifacts/
 /data
 config/llave.pem
 config/access_commands.txt
-# Large files to ignore
-data.rar
-
+config/mlflow.pem
+config/dvc-key.json
+classification_report.json
+confusion_matrix.json
