@@ -4,11 +4,11 @@ import pandas as pd
 import joblib
 
 # Asegurar las rutas
-base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(base_path)
 
 
-features_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../..","src","data_preprocessing"))
+features_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","src","data_preprocessing"))
 sys.path.append(features_path)
 
 # Importar módulos que el pipeline necesita
