@@ -20,6 +20,7 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 ```
 └── 📁Repo desarrollo soluciones
     └── 📁config
+    └── 📁dashboard
     └── 📁data
     └── 📁Docs
     └── 📁notebooks
@@ -34,6 +35,7 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 * **Docs/**: Documentación del proyecto con informes y análisis del problema.
 * **data/**: Almacena los datos en distintas etapas: crudos (raw), procesados (processed), y para visualización (visual).
 * **src/**: Código fuente del proyecto, dividido en submódulos para preprocesamiento (data_preprocessing/) y modelos (models/).
+* **dashboard/**: Código fuente del dashboard, incluyendo DOCKERFILE y componentes/utilidades.
 
 
 ## 🚀 Requisitos
