@@ -1,6 +1,9 @@
 # Ignorar entornos virtuales
 venv/
 env-tox/
+.tox/
+.pytest_cache/
+
 
 
 .pkg/

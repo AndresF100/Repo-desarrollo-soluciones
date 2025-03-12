@@ -154,7 +154,7 @@ def transform_and_split_data(df, target_column='origen_igdactmlmacalificacionori
     X_train_transformed = pipeline.fit_transform(X_train)
 
     # Guardar el pipeline para usarlo en la API
-    joblib.dump(pipeline, './trained pipelines/transformation_pipeline.pkl')
+    joblib.dump(pipeline, './trained_pipelines/transformation_pipeline.pkl')
 
     X_val_transformed = pipeline.transform(X_val)
     X_test_transformed = pipeline.transform(X_test)

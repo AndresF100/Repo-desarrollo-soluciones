@@ -1,16 +1,19 @@
 import os
 import pandas as pd
-import mlflow.pyfunc
 import pytest
 import sys
 
 # Ruta base del proyecto
-BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-sys.path.append(BASE_PATH)
 
-# Ruta al modelo empaquetado
-MODEL_PATH = os.path.join(BASE_PATH, "model_package")
+MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.path.append(MODEL_PATH)
+
+
+# Importar la función de predicción
+from src.loader import get_model
+
+modelo = get_model()
 
 # Ruta al archivo de entrada
 INPUT_FILE = os.path.join(BASE_PATH, "data", "user_input_example", "user_input.csv")
@@ -21,39 +24,39 @@ def sample_input():
     Carga un subconjunto aleatorio del CSV de entrada para las pruebas.
     """
     if not os.path.exists(INPUT_FILE):
-        pytest.fail(f"No se encontró el archivo de entrada: {INPUT_FILE}")
+        pytest.fail(f"❌ No se encontró el archivo de entrada: {INPUT_FILE}")
     
     df = pd.read_csv(INPUT_FILE, sep=';')
     return df.sample(n=3, random_state=42)  # Tomar 3 filas aleatorias para probar
 
-@pytest.fixture(scope="module")
-def loaded_model():
-    """
-    Carga el modelo empaquetado desde el directorio 'model_package'.
-    """
-    if not os.path.exists(MODEL_PATH):
-        pytest.fail(f"No se encontró el modelo empaquetado en: {MODEL_PATH}")
-    
-    model = mlflow.pyfunc.load_model(MODEL_PATH)
-    return model
-
-def test_model_prediction(loaded_model, sample_input):
+def test_model_prediction(sample_input):
     """
     Verifica que el modelo genera predicciones a partir de los datos de entrada.
     """
     # Validar que el DataFrame no esté vacío
-    assert not sample_input.empty, "El DataFrame de entrada está vacío."
+    assert not sample_input.empty, "❌ El DataFrame de entrada está vacío."
     
-    # Realizar predicción
-    predictions = loaded_model.predict(sample_input)
+    # Realizar predicciones
+    modelo = get_model()
+    predictions = modelo.predict(sample_input)
 
     # Validar que las predicciones no están vacías
-    assert predictions is not None, "Las predicciones no deberían ser None."
-    assert len(predictions) == len(sample_input), "La cantidad de predicciones no coincide con la entrada."
+    assert predictions is not None, "❌ Las predicciones no deberían ser None."
+    assert len(predictions) == len(sample_input), "❌ La cantidad de predicciones no coincide con la entrada."
     
     print("✅ Predicción exitosa:", predictions)
 
 
+# # Realizar predicciones
+# modelo = get_model()
 
+# if not os.path.exists(INPUT_FILE):
+#     pytest.fail(f"❌ No se encontró el archivo de entrada: {INPUT_FILE}")
 
+# df = pd.read_csv(INPUT_FILE, sep=';')
+# data= df.sample(n=3, random_state=42)
 
+# predictions = modelo.predict(data)
+
+# print("🔮 Predicciones:")
+# print(predictions)

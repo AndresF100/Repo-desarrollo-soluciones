@@ -46,7 +46,7 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     logging.info(f"\tSe han imputado los espacios vacíos o ceros en variables binarias.") 
 
     # Guardar en datos para visualización
-    df.to_csv(OUTPUT_DIR, index=False)
+    # df.to_csv(OUTPUT_DIR, index=False)
 
 
     # 4. Extraer mes y día del siniestro de la columna 'fecha_siniestro_igdacmlmasolicitudes'
