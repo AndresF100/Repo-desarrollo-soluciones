@@ -1,0 +1,32 @@
+Metadata-Version: 2.2
+Name: model_triage
+Version: 1.0.0
+Summary: Modelo de clasificación de accidentes laborales.
+Home-page: 
+Author: andresforero
+Author-email: af.foreroo1@uniandes.edu.co
+License: BSD-3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.10.0
+Description-Content-Type: text/markdown
+Requires-Dist: mlflow
+Requires-Dist: python-dotenv
+Requires-Dist: imblearn
+Requires-Dist: numpy==2.2.2
+Requires-Dist: psutil==6.1.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Modelo de clasificación de accidentes laborales.

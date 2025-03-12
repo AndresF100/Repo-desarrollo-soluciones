@@ -1,0 +1,12 @@
+include src/requirements.txt
+include src/VERSION
+include src
+
+# Incluir todos los archivos dentro de src
+recursive-include src *
+
+# Opcional: Si quieres excluir caché o carpetas específicas
+global-exclude __pycache__ *.pyc
+
+# Excluir el directorio mlruns
+prune src/mlruns
