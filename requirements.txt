@@ -8,7 +8,7 @@ imblearn
 dash==2.9.3
 dash-core-components==2.0.0
 dash-html-components==2.0.0
-numpy
+numpy==2.2.2
 plotly==5.14.1
 matplotlib==3.7.1
 wordcloud

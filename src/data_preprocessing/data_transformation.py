@@ -28,8 +28,10 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     # Convertir las columnas seleccionadas a tipo str
     df[cols_to_str] = df[cols_to_str].astype(str)
 
-    # Variable a predecir como categórica
-    df['origen_igdactmlmacalificacionorigen'] = df['origen_igdactmlmacalificacionorigen'].astype(str)
+    # permite reutilizar el código en datasets de entrada para predicción
+    if 'origen_igdactmlmacalificacionorigen' in df.columns:
+        # Variable a predecir como categórica
+        df['origen_igdactmlmacalificacionorigen'] = df['origen_igdactmlmacalificacionorigen'].astype(str)
 
     logging.info(f"\tSe han ajustado las columnas de categoría.")
 
@@ -44,10 +46,13 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     logging.info(f"\tSe han imputado los espacios vacíos o ceros en variables binarias.") 
 
     # Guardar en datos para visualización
-    df.to_csv(OUTPUT_DIR, index=False)
+    # df.to_csv(OUTPUT_DIR, index=False)
 
 
     # 4. Extraer mes y día del siniestro de la columna 'fecha_siniestro_igdacmlmasolicitudes'
+    # Convertir a datetime
+    df['fecha_siniestro_igdacmlmasolicitudes'] = pd.to_datetime(df['fecha_siniestro_igdacmlmasolicitudes'])
+
     df['fecha_siniestro_month'] = df['fecha_siniestro_igdacmlmasolicitudes'].dt.month
     df['fecha_siniestro_day'] = df['fecha_siniestro_igdacmlmasolicitudes'].dt.day
 
