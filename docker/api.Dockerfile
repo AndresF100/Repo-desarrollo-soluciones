@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -11,6 +11,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy API code
 COPY api/ .
+
+# Copy the model wheel file
+COPY dist/model_triage-1.0.0-py3-none-any.whl /app/dist/
+
+# Install the model package (with dependencies)
+RUN pip install /app/dist/model_triage-1.0.0-py3-none-any.whl
 
 # Create models directory even if empty
 RUN mkdir -p ./models

@@ -188,10 +188,10 @@ def register_prediction_interface_callbacks(app):
             response = requests.post(
                 f"{API_URL}/predict",
                 json={
-                    "sector_economico": parte_cuerpo,  # Using the API fields we created before
-                    "genero": municipio,
-                    "tipo_vinculacion": tipo_jornada,
-                    "jornada_trabajo": realizando_trabajo,
+                    "parte_cuerpo": parte_cuerpo,
+                    "municipio": municipio,
+                    "jornada_trabajo": tipo_jornada,
+                    "realizando_trabajo": realizando_trabajo,
                     "descripcion": descripcion if descripcion else ""
                 },
                 timeout=10  # Set a timeout for the request
@@ -201,23 +201,16 @@ def register_prediction_interface_callbacks(app):
             if response.status_code == 200:
                 result = response.json()
                 prediction = result["prediction"]
-                probability = result["probability"]
-                
-                # Format probability as percentage
-                probability_percent = f"{probability * 100:.1f}%"
                 
                 # Determine color based on prediction
-                result_color = colors['secondary'] if prediction == "Positivo" else colors['primary']
+                result_color = colors['secondary'] if prediction == 1 else colors['primary']
                 
                 return [
                     html.H4("Resultado de la Predicción", 
                             style={'marginTop': '0', 'color': colors['text']}),
                     html.Div([
-                        html.Span("Predicción: ", style={'fontWeight': 'bold', 'color': colors['text']}),
-                        html.Span(prediction, style={'fontWeight': 'bold', 'color': result_color}),
-                        html.Br(),
-                        html.Span("Probabilidad: ", style={'fontWeight': 'bold', 'color': colors['text']}),
-                        html.Span(probability_percent, style={'color': result_color})
+                        html.Span("Nivel de Triage del Accidente: ", style={'fontWeight': 'bold', 'color': colors['text']}),
+                        html.Span(prediction, style={'fontWeight': 'bold', 'color': result_color})
                     ]),
                     html.Hr(style={'margin': '15px 0'}),
                     html.Div([

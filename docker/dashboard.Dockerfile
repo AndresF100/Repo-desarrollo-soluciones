@@ -1,9 +1,11 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install curl for healthcheck
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Install curl for healthcheck and build tools for wordcloud
+RUN apt-get update && \
+    apt-get install -y curl build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install required packages
 COPY dashboard/requirements.txt .
