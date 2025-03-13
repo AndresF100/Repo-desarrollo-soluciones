@@ -1,0 +1,43 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app:/app/src
+    volumes:
+      - ./models:/app/models
+      - ./dist:/app/dist
+      - ./src:/app/src
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - accident-prediction-network
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/dashboard.Dockerfile
+    ports:
+      - "8050:8050"
+    environment:
+      - API_URL=http://api:8000
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app:/app/src
+    volumes:
+      - ./models:/app/models
+      - ./dist:/app/dist
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./dashboard:/app/dashboard  
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - accident-prediction-network
+
+networks:
+  accident-prediction-network:
+    driver: bridge
