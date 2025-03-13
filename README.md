@@ -21,6 +21,8 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 └── 📁Repo desarrollo soluciones
     └── 📁config
     └── 📁dashboard
+    └── 📁api
+    └── 📁docker
     └── 📁data
     └── 📁Docs
     └── 📁notebooks
@@ -35,8 +37,9 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 * **Docs/**: Documentación del proyecto con informes y análisis del problema.
 * **data/**: Almacena los datos en distintas etapas: crudos (raw), procesados (processed), y para visualización (visual).
 * **src/**: Código fuente del proyecto, dividido en submódulos para preprocesamiento (data_preprocessing/) y modelos (models/).
-* **dashboard/**: Código fuente del dashboard, incluyendo DOCKERFILE y componentes/utilidades.
-
+* **dashboard/**: Código fuente del dashboard, incluyendo componentes/utilidades.
+* **api/**: Código fuente de la API que permite consumir el modelo a través del tablero.
+* **docker/**: Código fuente del despliegue del tablero y la API en docker, incluyendo DOCKERFILE.
 
 ## 🚀 Requisitos
 
