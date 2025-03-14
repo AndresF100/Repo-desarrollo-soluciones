@@ -19,33 +19,39 @@ A continuación, se listan los miembros del equipo junto con sus usuarios de Git
 ## 📂 Estructura del Repositorio
 ```
 └── 📁Repo desarrollo soluciones
-    └── 📁config
-    └── 📁dashboard
-    └── 📁api
-    └── 📁docker
-    └── 📁data
-    └── 📁Docs
-    └── 📁notebooks
+    ├── 📁api
+    ├── 📁config
+    ├── 📁dashboard
+    ├── 📁data
+    ├── 📁dist
+    ├── 📁docker
+    ├── 📁Docs
+    ├── 📁notebooks
     └── 📁src
 ```
 
 ### Descripción de Carpetas
-
-* **config/**: Contiene configuraciones, llaves de acceso para sesiones de VM y scripts auxiliares.
-* **.github/**: Almacena configuraciones para automatización con GitHub Actions (CI/CD).
-* **notebooks/**: Incluye notebooks de Jupyter para exploración, preprocesamiento y análisis.
-* **Docs/**: Documentación del proyecto con informes y análisis del problema.
-* **data/**: Almacena los datos en distintas etapas: crudos (raw), procesados (processed), y para visualización (visual).
-* **src/**: Código fuente del proyecto, dividido en submódulos para preprocesamiento (data_preprocessing/) y modelos (models/).
-* **dashboard/**: Código fuente del dashboard, incluyendo componentes/utilidades.
-* **api/**: Código fuente de la API que permite consumir el modelo a través del tablero.
-* **docker/**: Código fuente del despliegue del tablero y la API en docker, incluyendo DOCKERFILE.
-
+* **api/**: Contiene el código de la API en FastAPI para exponer el modelo, incluyendo app.py y adaptadores.
+* **config/**: Almacena archivos de configuración, credenciales (como dvc-key.json), y comandos para acceder a recursos externos (como instancias de EC2).
+* **dashboard/**: Código del tablero interactivo para visualizar métricas y predicciones, organizado en `components/` y `utils/`.  
+* **data/**: Contiene los datos del proyecto en diferentes fases (se obtiene por dvc):  
+    - **raw/**: Datos originales sin procesar.  
+    - **processed/**: Datos transformados para entrenar y validar el modelo.  
+    - **visual/**: Datos específicos para visualización en el dashboard.
+* **dist/**: Modelo empaquetado listo para instalación.
+* **docker/**: Incluye Dockerfiles para construir imágenes de la API y el dashboard, facilitando el despliegue en contenedores.  
+* **Docs/**: Documentación del proyecto, incluyendo análisis exploratorio y descripción del problema.  
+* **notebooks/**: Notebooks de Jupyter para la exploración de datos, preprocesamiento y experimentos.  
+* **src/**: Código fuente principal, dividido en submódulos:  
+    - **data_preprocessing/**: Scripts para limpieza, transformación y creación del pipeline de preprocesamiento.  
+    - **models/**: Implementación de distintos modelos (XGBoost, RandomForest, etc.), evaluaciones y búsqueda de hiperparámetros.  
+    - **modelo_triage/**: Utilidades para cargar el modelo y transformar entradas antes de realizar predicciones.
+ 
+  
 ## 🚀 Requisitos
 
-Si utilizas DVC, inicializa el proyecto con:
+Para descargar los datos, pide a uno de los creadores del repositorio que te comparta el **dvc-key.json**, agregalo a tu carpeta config, y ejecuta en dvc:
     
 ```bash
-dvc init
-dvc pull
+dvc remote modify gcsremote credentialpath ruta/a/dvc-key.json
 ```
