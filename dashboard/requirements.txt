@@ -1,9 +1,9 @@
-dash==2.11.1
+dash==2.15.0
 pandas==2.1.2
 plotly==5.17.0
 numpy==1.26.0
 wordcloud==1.9.2
 matplotlib==3.8.1
-nltk==3.8.1
-requests==2.31.0
-scikit-learn
+nltk==3.9
+requests==2.32.0
+scikit-learn==1.5.0
