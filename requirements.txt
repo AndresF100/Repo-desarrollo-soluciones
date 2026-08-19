@@ -1,19 +1,19 @@
 ## python 3.12.6
 pandas
-scikit-learn
-mlflow
+scikit-learn>=1.5.0
+mlflow>=2.22.2
 xgboost
 sentence-transformers
 imblearn
-dash==2.9.3
-dash-core-components==2.0.0
-dash-html-components==2.0.0
+dash>=2.15.0
+dash-core-components
+dash-html-components
 numpy==2.2.2
 plotly==5.14.1
 matplotlib==3.7.1
 wordcloud
-pillow==10.0.0
+pillow>=10.3.0
 dvc
-lightgbm 
+lightgbm
 catboost
 python-dotenv
